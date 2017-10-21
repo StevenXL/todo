@@ -20,7 +20,9 @@ data User = User
 
 $(deriveJSON defaultOptions ''User)
 
-type API = "users" :> Get '[JSON] [User]
+type UserAPI = "users" :> Get '[JSON] [User]
+type StaticAPI = Raw
+type WebAPI = UserAPI :<|> StaticAPI
 
 startApp :: IO ()
 startApp = run 8080 app
@@ -28,11 +30,11 @@ startApp = run 8080 app
 app :: Application
 app = serve api server
 
-api :: Proxy API
+api :: Proxy WebAPI
 api = Proxy
 
-server :: Server API
-server = return users
+server :: Server WebAPI
+server = return users :<|> serveDirectoryFileServer "../front-end/build"
 
 users :: [User]
 users = [ User 1 "Isaac" "Newton"
