@@ -20,7 +20,7 @@ data User = User
 
 $(deriveJSON defaultOptions ''User)
 
-type UserAPI = "users" :> Get '[JSON] [User]
+type UserAPI = "api" :> "users" :> Get '[JSON] [User]
 type StaticAPI = Raw
 type WebAPI = UserAPI :<|> StaticAPI
 

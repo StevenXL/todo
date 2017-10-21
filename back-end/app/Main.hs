@@ -3,4 +3,7 @@ module Main where
 import Lib
 
 main :: IO ()
-main = startApp
+main = do
+  putStrLn "Starting App"
+  startApp
+  putStrLn "Shutting Down"
