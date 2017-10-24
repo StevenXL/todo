@@ -33,8 +33,11 @@ app = serve api server
 api :: Proxy WebAPI
 api = Proxy
 
+userHandler :: Handler [User]
+userHandler = return users
+
 server :: Server WebAPI
-server = return users :<|> serveDirectoryFileServer "../front-end/build"
+server = userHandler :<|> serveDirectoryFileServer "../front-end/build"
 
 users :: [User]
 users = [ User 1 "Isaac" "Newton"

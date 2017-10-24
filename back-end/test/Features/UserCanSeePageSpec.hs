@@ -14,4 +14,4 @@ spec = do
     describe "home page" $ do
         session "visiting home page" $ using chromeOnly $ do
             it "home page loads" $ runWD $
-                openPage "localhost:3000"
+                openPage "localhost:8080"

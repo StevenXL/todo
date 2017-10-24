@@ -6,4 +6,3 @@ main :: IO ()
 main = do
   putStrLn "Starting App"
   startApp
-  putStrLn "Shutting Down"
