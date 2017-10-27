@@ -3,8 +3,8 @@
 module Main where
 
 import Lib (startApp)
-import Models (migrateAll)
-import Database.Persist.Postgresql (ConnectionString, createPostgresqlPool, SqlBackend, runMigration, runSqlPool)
+import Models (migrateAll, User(..))
+import Database.Persist.Postgresql (ConnectionString, createPostgresqlPool, SqlBackend, runMigration, runSqlPool, insert)
 import Data.Pool (Pool)
 import Control.Monad.Logger
 
@@ -12,6 +12,7 @@ main :: IO ()
 main = do
     pool <- (createPostgresqlPool connStr 1) :: IO (Pool SqlBackend)
     runSqlPool (runMigration migrateAll) pool
+    runSqlPool (insert $ User "FirstName" "LastName" "firstname.lastname@example.com") pool
     startApp pool
 
 connStr :: ConnectionString
