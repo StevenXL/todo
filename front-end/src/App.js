@@ -22,7 +22,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        {this.state.users.map(user => <User key={user.userId} {...user} />)}
+        {this.state.users.map(user => <User key={user.id} {...user} />)}
       </div>
     );
   }

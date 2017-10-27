@@ -1,16 +1,16 @@
 import React from "react";
 
-export default function User({ userId, userFirstName, userLastName }) {
+export default function User({ email, firstName, lastName, id }) {
   return (
     <div>
       <p>
-        Id: {userId}
+        Id: {id}
       </p>
       <p>
-        First Name: {userFirstName}
+        First Name: {firstName}
       </p>
       <p>
-        Last Name: {userLastName}
+        Last Name: {lastName}
       </p>
     </div>
   );
