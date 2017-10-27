@@ -15,7 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
+  exposed-modules:     Lib, Models
   build-depends:       base >= 4.7 && < 5
                      , aeson
                      , servant-server
@@ -23,7 +23,10 @@ library
                      , warp
                      , resource-pool
                      , persistent-postgresql
+                     , persistent-template
+                     , persistent
                      , monad-control
+                     , text
   default-language:    Haskell2010
 
 executable back-end-exe
