@@ -1,31 +1,20 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+
 import "./App.css";
-import User from "./User";
 
-class App extends Component {
-  state = { users: [] };
+import RootPage from "./RootPage";
+import SignUp from "./SignUp";
+import NoMatch from "./NoMatch";
 
-  componentDidMount() {
-    fetch("/api/users")
-      .then(response => response.json())
-      .then(users => this.setState({ users }));
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        {this.state.users.map(user => <User key={user.id} {...user} />)}
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Switch>
+      <Route exact path="/" component={RootPage} />
+      <Route path="/sign-up" component={SignUp} />
+      <Route component={NoMatch} />
+    </Switch>
+  );
+};
 
 export default App;
