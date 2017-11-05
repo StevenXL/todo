@@ -31,7 +31,7 @@ class SignUp extends React.Component {
 
       const body = JSON.stringify(postParams);
 
-      return fetch("api/session", {
+      return fetch("api/users", {
         method: "POST",
         body,
         headers: { "Content-Type": "application/json" }

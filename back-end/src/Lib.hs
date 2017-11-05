@@ -1,4 +1,5 @@
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE FlexibleContexts #-}
@@ -11,7 +12,8 @@ module Lib
 
 import Api.Todo
        (AuthedData(AuthedData), Todo(Todo), TodoAPI, todos)
-import Api.User (UserAPI)
+import Api.User (CreateUserReq, UserAPI)
+import Control.Monad.IO.Class
 import Data.Aeson
 import Data.Aeson.TH
 import Data.ByteString.Char8
@@ -36,7 +38,7 @@ app pool =
     serveWithContext
         api
         context
-        (userHandler' :<|> todoHandler :<|>
+        ((userHandler' :<|> createUserHandler) :<|> todoHandler :<|>
          serveDirectoryFileServer "../front-end/build")
   where
     userHandler' = userHandler pool
@@ -56,3 +58,8 @@ api = Proxy
 
 userHandler :: Pool SqlBackend -> Handler [Entity User]
 userHandler pool = runSqlPool (selectList [] []) pool
+
+createUserHandler :: CreateUserReq -> Handler User
+createUserHandler createUserReq = do
+    liftIO $ Prelude.putStrLn (show createUserReq)
+    return $ (User "Steven" "Paul" "Leiva")
