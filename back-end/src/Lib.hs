@@ -9,6 +9,8 @@ module Lib
     , app
     ) where
 
+import Api.Todo
+       (AuthedData(AuthedData), Todo(Todo), TodoAPI, todos)
 import Api.User (UserAPI)
 import Data.Aeson
 import Data.Aeson.TH
@@ -21,23 +23,6 @@ import Models
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
-
-data Todo = Todo
-    { description :: String
-    } deriving (Eq, Show, Generic)
-
-instance ToJSON Todo
-
-todos :: [Todo]
-todos = [Todo "Make Coffee", Todo "Make Code"]
-
---
-newtype AuthedData =
-    AuthedData String
-
---
-type TodoAPI
-     = "api" :> "todos" :> BasicAuth "todos" AuthedData :> Get '[ JSON] [Todo]
 
 type StaticAPI = Raw
 
